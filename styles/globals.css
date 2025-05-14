@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* 
+body {
+  background-color: #f6f9ff;
+} */
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#f6f9ff] text-gray-900 dark:bg-[#252837] dark:text-gray-100;
+  }
+  .listaActiva {
+    @apply bg-[#f6f9ff] dark:bg-[#252837] rounded-tl-xl rounded-bl-xl p-3 sm:p-4;
+  }
+  .listaActiva a,
+  .navLink {
+    @apply bg-white dark:bg-[#ec7c6a] shadow-lg shadow-blue-100 dark:shadow-[#ec7b6a3a] p-3 flex rounded-lg;
+  }
+  .listaActiva .icon {
+    @apply text-xl sm:text-2xl md:text-3xl mx-auto text-[#012970] dark:text-white;
+  }
+  .lista {
+    @apply rounded-tl-xl rounded-bl-xl p-3 sm:p-4;
+  }
+  .lista a,
+  .navLink {
+    @apply bg-white dark:bg-[#252837] shadow-lg shadow-[#00000010] hover:shadow-blue-100 dark:shadow-[#191f2cd3] hover:dark:shadow-[#ec7b6a3a] p-3 flex rounded-lg;
+  }
+
+  .card-form {
+    @apply outline-none  rounded-lg py-2 px-3 bg-[#f6f9ff] dark:bg-[#252837] focus:shadow-md focus:shadow-blue-100 focus:dark:shadow-[#ec7b6a3a];
+  }
+
+  /* hover:dark:shadow-[#ec7b6a3a] */
+  .lista .icon {
+    @apply text-xl sm:text-2xl md:text-3xl mx-auto text-[#012970] dark:text-[#ec7c6a];
+  }
+  .text-title {
+    @apply text-[#012970] dark:text-[#ec7c6a] font-[600];
+  }
+  /* #012970 */
+  .bg-card {
+    transition: all 0.3s ease;
+    @apply bg-white dark:bg-[#1F1D2B];
+  }
+  .bg-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 13px -7px rgba(0, 0, 0, 0.1);
+  }
+  .bg-card3 {
+    @apply bg-white dark:bg-[#1F1D2B];
+  }
+  .bg-card2 {
+    @apply bg-white dark:bg-[#252837] shadow-lg hover:shadow-blue-100 dark:shadow-[#111827d3];
+  }
+  .button {
+    @apply bg-white dark:bg-[#252837] shadow-lg shadow-[#00000010] hover:shadow-blue-100 dark:shadow-[#191f2cd3] hover:dark:shadow-[#191f2ce1] p-2 flex rounded-lg;
+  }
+  .text-section {
+    @apply text-[#012970] dark:text-white font-[600];
+  }
+
+  .btn-delete {
+    @apply rounded-lg border-[#E87C68] border-[1px] p-2 text-[#E87C68] hover:bg-[#E87C68] hover:text-white active:bg-[#E87C68] active:text-white;
+  }
+  .btn-edit {
+    @apply rounded-lg border-[#5a6ba5] border-[1px] p-2 text-[#5a6ba5] hover:bg-[#5a6ba5] hover:text-white active:bg-[#5a6ba5] active:text-white;
+  }
+  .btn-primary {
+    @apply bg-white border-[1px] border-[#012970] dark:bg-[#ec7c6a] text-[#012970] font-semibold dark:text-white shadow-lg shadow-blue-100 dark:shadow-[#ec7b6a3a] p-2 text-center rounded-lg text-sm md:text-base;
+  }
+}
+
+/* Seccion de los navs */
