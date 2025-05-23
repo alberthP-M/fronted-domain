@@ -19,16 +19,16 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await axios.post(
+      /*const response = await axios.post(
         "http://localhost:3000/api/auth/login",
         {
           email,
           password,
         }
-      );
+      );*/
 
-      const { token } = response.data;
-      localStorage.setItem("authToken", token);
+      //const { token } = response.data;
+      localStorage.setItem("authToken", "datosToken");
       router.push("/");
     } catch (err) {
       setError("Credenciales incorrectas");
