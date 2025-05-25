@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { RiEdit2Line, RiDeleteBin6Line, RiAddLine } from "react-icons/ri";
 import { Dialog } from "@headlessui/react";
-import Layout from "../components/shared/layout";
-import withAuth from "../components/withAuth";
+import Layout from "../../components/shared/layout";
+import withAuth from "../../components/withAuth";
 
 // Función para obtener datos iniciales (desde localStorage o datos por defecto)
 const getInitialCategories = () => {

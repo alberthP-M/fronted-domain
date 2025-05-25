@@ -1,9 +1,9 @@
-import Layout from "../components/shared/layout";
+import Layout from "../../components/shared/layout";
 import { Listbox, Tab, Transition } from "@headlessui/react";
-import { categories, tables } from "../utils/data";
-import Card from "../components/card";
+import { categories, tables } from "../../utils/data";
+import Card from "../../components/card";
 import { Fragment, useState } from "react";
-import ListaBox from "../components/listaBox";
+import ListaBox from "../../components/listaBox";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -43,9 +43,7 @@ export default function Home() {
             {/* Seccion de contenido de tabs */}
             <Tab.Panels>
               <div className="flex items-center justify-between pt-5 pb-2">
-                <h2 className=" text-xl md:text-2xl text-title">
-                  Choose Dishes
-                </h2>
+                <h2 className=" text-xl md:text-2xl text-title">Comidas</h2>
                 {/* Lista de mesas */}
                 <ListaBox
                   selected={selected}

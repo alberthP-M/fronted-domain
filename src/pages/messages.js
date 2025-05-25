@@ -1,6 +1,6 @@
 import React from "react";
-import Layout from "../components/shared/layout";
-import withAuth from "../components/withAuth";
+import Layout from "../../components/shared/layout";
+import withAuth from "../../components/withAuth";
 
 const Messages = () => {
   return (

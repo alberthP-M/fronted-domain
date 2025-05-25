@@ -15,7 +15,7 @@ const Card = ({ dishe }) => {
           />
         </div>
         <h2 className="text-section text-lg">{dishe.title}</h2>
-        <span className="font-semibold mt-1 text-md">$ {dishe.price}</span>
+        <span className="font-semibold mt-1 text-md">{dishe.price} Bs</span>
         <p className="text-gray-500 mt-1">{dishe.stock} Bowls available</p>
       </div>
     </div>

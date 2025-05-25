@@ -8,8 +8,8 @@ import {
   RiPhoneLine,
 } from "react-icons/ri";
 import { Dialog } from "@headlessui/react";
-import Layout from "../components/shared/layout";
-import withAuth from "../components/withAuth";
+import Layout from "../../components/shared/layout";
+import withAuth from "../../components/withAuth";
 
 // Tipos de usuario disponibles
 const USER_TYPES = {
