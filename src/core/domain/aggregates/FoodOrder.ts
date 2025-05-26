@@ -1,41 +1,59 @@
 import { FoodModel } from "../entities/FoodModel";
 import { Price } from "../value-objects/Price";
 import { FoodId } from "../value-objects/FoodId";
+import { DomainEvent } from "../events/DomainEvent";
 
 export class FoodOrder {
-  private readonly items: Map<FoodId, { food: FoodModel; quantity: number }> =
-    new Map();
-  private createdAt: Date = new Date();
+  private readonly id: string;
+  private readonly items: Map<FoodId, { food: FoodModel; quantity: number }>;
+  private readonly createdAt: Date;
+  private status: "pending" | "completed" | "cancelled";
+  private events: DomainEvent[];
 
-  // Métodos principales
+  constructor(id: string) {
+    this.id = id;
+    this.items = new Map();
+    this.createdAt = new Date();
+    this.status = "pending";
+    this.events = [new OrderCreatedEvent(this.id)];
+  }
+
   addItem(food: FoodModel, quantity: number = 1): void {
+    if (this.status !== "pending")
+      throw new Error("Cannot modify completed/cancelled order");
     if (quantity <= 0) throw new Error("Quantity must be positive");
     if (!food.isActive) throw new Error("Cannot order inactive food");
 
     const existing = this.items.get(food.id);
-    this.items.set(food.id, {
-      food,
-      quantity: existing ? existing.quantity + quantity : quantity,
-    });
+    const newQuantity = existing ? existing.quantity + quantity : quantity;
+
+    this.items.set(food.id, { food, quantity: newQuantity });
+    this.events.push(new OrderItemAddedEvent(this.id, food.id, quantity));
   }
 
   removeItem(foodId: FoodId): void {
-    this.items.delete(foodId);
-  }
-
-  updateQuantity(foodId: FoodId, newQuantity: number): void {
-    if (newQuantity <= 0) {
-      this.removeItem(foodId);
-      return;
-    }
+    if (this.status !== "pending")
+      throw new Error("Cannot modify completed/cancelled order");
 
     const item = this.items.get(foodId);
-    if (!item) throw new Error("Food item not found in order");
-
-    this.items.set(foodId, { ...item, quantity: newQuantity });
+    if (item) {
+      this.items.delete(foodId);
+      this.events.push(
+        new OrderItemRemovedEvent(this.id, foodId, item.quantity)
+      );
+    }
   }
 
-  // Cálculos
+  completeOrder(): void {
+    if (this.status !== "pending") return;
+    this.status = "completed";
+  }
+
+  cancelOrder(): void {
+    if (this.status !== "pending") return;
+    this.status = "cancelled";
+  }
+
   calculateSubtotal(): Price {
     let total = 0;
     this.items.forEach(({ food, quantity }) => {
@@ -44,12 +62,28 @@ export class FoodOrder {
     return new Price(total);
   }
 
-  // Accessors
+  clearEvents(): void {
+    this.events = [];
+  }
+
+  getUncommittedEvents(): DomainEvent[] {
+    return [...this.events];
+  }
+
+  // Getters
+  get orderId(): string {
+    return this.id;
+  }
+
   get orderItems() {
     return Array.from(this.items.values());
   }
 
   get orderDate() {
     return this.createdAt;
+  }
+
+  get currentStatus() {
+    return this.status;
   }
 }
