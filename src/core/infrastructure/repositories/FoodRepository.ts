@@ -9,6 +9,15 @@ export class FoodRepository implements IFoodRepository {
   constructor(apiClient: FoodApiClient) {
     this.apiClient = apiClient;
   }
+  findByCategory(categoryId: string): Promise<FoodModel[]> {
+    throw new Error("Method not implemented.");
+  }
+  save(food: FoodModel): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: FoodId): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 
   async findById(id: FoodId): Promise<FoodModel | null> {
     const foods = await this.apiClient.getFoods();
