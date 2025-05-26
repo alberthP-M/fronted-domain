@@ -25,4 +25,51 @@ export class FoodApiClient {
         )
     );
   }
+
+  async createFood(food: FoodModel): Promise<FoodModel> {
+    const response = await axios.post(`${this.baseUrl}/foods`, {
+      id: food.id.value,
+      name: food.name,
+      description: food.description,
+      price: food.price.value,
+      imageUrl: food.imageUrl,
+      categoryId: food.categoryId,
+      isActive: food.isActive,
+    });
+
+    return new FoodModel(
+      new FoodId(response.data.id),
+      response.data.name,
+      response.data.description,
+      new Price(response.data.price),
+      response.data.imageUrl,
+      response.data.categoryId,
+      response.data.isActive
+    );
+  }
+
+  async updateFood(food: FoodModel): Promise<FoodModel> {
+    const response = await axios.put(`${this.baseUrl}/foods/${food.id.value}`, {
+      name: food.name,
+      description: food.description,
+      price: food.price.value,
+      imageUrl: food.imageUrl,
+      categoryId: food.categoryId,
+      isActive: food.isActive,
+    });
+
+    return new FoodModel(
+      new FoodId(response.data.id),
+      response.data.name,
+      response.data.description,
+      new Price(response.data.price),
+      response.data.imageUrl,
+      response.data.categoryId,
+      response.data.isActive
+    );
+  }
+
+  async deleteFood(id: FoodId): Promise<void> {
+    await axios.delete(`${this.baseUrl}/foods/${id.value}`);
+  }
 }
